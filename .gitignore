@@ -1,25 +1,31 @@
-# CakePHP 3
+# Dossiers et fichiers générés par Symfony
+/var/
+/public/bundles/
+/public/build/
+/public/uploads/
+/bootstrap/cache/
+/.phpunit.result.cache
+/php-cs-fixer.cache
 
-/vendor/*
-/config/app.php
+# Dossiers et fichiers générés par Composer
+/vendor/
+/bin/
+/composer.phar
+/composer.lock
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+# Dossiers générés par Docker
+.docker/
+.docker-sync/
 
-/logs/*
-!/logs/empty
+# Fichiers de configuration spécifiques à l'environnement
+/.env
+/.env.local
+/.env.*.local
 
-# CakePHP 2
+# Fichiers de logs
+/var/log/
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+# Fichiers de sauvegarde
+*~
+*.swp
+.DS_Store
