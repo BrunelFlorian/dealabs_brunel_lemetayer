@@ -1,0 +1,77 @@
+// Variables
+$font-stack: Arial,
+sans-serif;
+$base-font-size: 16px;
+
+// Box-sizing reset
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Margin and padding reset
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dt,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+// Font reset
+html {
+    font-size: $base-font-size;
+}
+
+body {
+    font-size: 1rem;
+    font-family: $font-stack;
+}
+
+// List style reset
+ul,
+ol {
+    list-style: none;
+}
+
+// Anchor text reset
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Image display reset
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+// Heading margin reset
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}

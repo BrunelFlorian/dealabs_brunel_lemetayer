@@ -25,7 +25,6 @@ security:
                 secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
 
-# TODO rester connecter + oubli mdp
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
