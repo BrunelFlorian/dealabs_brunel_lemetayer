@@ -18,11 +18,11 @@ class AppFixtures extends Fixture
             $deal->setTitle($faker->sentence(4));
             $deal->setPrice($faker->randomFloat(2, 10, 100));
             $deal->setDescription($faker->paragraph());
-            $deal->setNotation($faker->numberBetween(1, 5));
-            $deal->setUserCreated($faker->randomNumber());
+            $deal->setNotation($faker->numberBetween(1, 100));
+            $deal->setUserCreated(1);
             $deal->setDate($faker->dateTimeBetween('-1 year', 'now'));
             $deal->setExpirationDate($faker->dateTimeBetween('now', '+1 year'));
-            $deal->setCategory($faker->randomElement(['Electronics', 'Fashion', 'Books']));
+            $deal->setCategory($faker->randomElement(['Tips', 'Coupon code']));
 
             $manager->persist($deal);
         }
