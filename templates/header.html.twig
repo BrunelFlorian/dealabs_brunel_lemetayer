@@ -1,28 +1,31 @@
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/images/logo-header.png') }}" alt="Logo"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_home') }}">Good deals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_home') }}">Codes promo</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+<nav class="navbar sticky-top justify-content-between bg-darkgrey">
+    <div class="navbar-menu d-flex flex-row">
+        <a class="navbar-brand m-0" href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/images/logo-header.png') }}" alt="Logo"></a>
+        <div class="navbar-links">
+            <ul class="navbar-nav flex-row mr-auto fw-bold">
+                <li class="nav-item ms-3 me-2">
+                    <a class="nav-link" href="{{ path('app_home') }}">Good deals</a>
+                </li>
+                <li class="nav-item ms-2 me-3">
+                    <a class="nav-link" href="{{ path('app_home') }}">Coupon codes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="navbar-utilities d-flex flex-row">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2 shape-circle" type="search" placeholder="Search..." aria-label="Search">
         </form>
         {% if app.user %}
             <li class="nav-item">
-                <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+                <a href="{{ path('app_logout') }}" class="btn btn-danger shape-circle">Logout</a>
             </li>
         {% else %}
-             <li class="nav-item">
-                <a href="{{ path('app_login') }}" class="btn btn-primary btn-login">Login</a>
+            <li class="nav-item">
+                <a href="{{ path('app_login') }}" class="btn btn-primary shape-circle">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-primary shape-circle">Post...</a>
             </li>
         {% endif %}
     </div>

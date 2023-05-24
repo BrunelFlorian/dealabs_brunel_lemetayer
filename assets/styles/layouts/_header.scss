@@ -1,9 +1,17 @@
 .navbar {
-    .logo {
-        width: 156px;
-    }
+    .navbar-menu {
+        .logo {
+            width: 156px;
+        }
 
-    .btn-login {
-        border-radius: 50%;
+        .nav-link {
+            font-size: .875rem;
+            font-weight: 700;
+            color: hsla(0, 0%, 100%, 0.8);
+
+            :hover {
+                color: #fff;
+            }
+        }
     }
 }
