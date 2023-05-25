@@ -8,10 +8,14 @@
             font-size: .875rem;
             font-weight: 700;
             color: hsla(0, 0%, 100%, 0.8);
-
+            
             :hover {
                 color: #fff;
             }
         }
     }
+}
+
+.nav-item {
+    list-style-type: none;
 }

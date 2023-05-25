@@ -1,16 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste des deals</h1>
+    <div class="row g-0 mx-auto p-2" style="width: 80%;">
+        <div class="col-sm-6 col-md-8">
+            
+            <h1>Liste des deals</h1>
 
-    <ul>
-        {% for deal in deals %}
-            <li>
-                <h2>{{ deal.Title }}</h2>
-                <p>{{ deal.Description }}</p>
-                <p>Prix : {{ deal.Price }}</p>
-                <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+            <ul>
+                {% for deal in deals %}
+                    <div class="card mb-3" style="max-width: 700px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h2>{{ deal.Title }}</h2>
+                                    <p>{{ deal.Description }}</p>
+                                    <p>Prix : {{ deal.Price }}</p>
+                                    <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-6 col-md-4">
+            <h1>Les plus electrifiés</h1>
+
+            <ul>
+                {% for deal in deals %}
+                    <li>
+                        <h2>{{ deal.Title }}</h2>
+                        <p>{{ deal.Description }}</p>
+                        <p>Prix : {{ deal.Price }}</p>
+                        <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
