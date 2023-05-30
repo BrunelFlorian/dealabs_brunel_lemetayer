@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Hello HotController!{% endblock %}
+
 {% block body %}
     <ul class="nav nav-underline mx-auto p-2 border-bottom">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">À la une</a>
+            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">À la une</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_hot') }}">Hot</a>
+            <a class="nav-link" href="#">Hot</a>
         </li>
     </ul>
     <div class="row g-0 mx-auto p-2">
-        <div class="col-9">
-            <h1>Deals list</h1>
+        <div class="col-sm-6 col-md-8">
+            <h1>Hot deals</h1>
             <ul>
                 {% for deal in deals %}
-                    <div class="card mb-3 me-3">
+                    <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="..." class="img-fluid rounded-start" alt="...">
@@ -23,8 +25,8 @@
                                 <div class="card-body">
                                     <h2>{{ deal.Title }}</h2>
                                     <p>{{ deal.Description }}</p>
-                                    <p>Prix : {{ deal.Price }}</p>
-                                    <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                    <p>Price: {{ deal.Price }}</p>
+                                    <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -32,15 +34,16 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="card col-3">
+        <div class="col-6 col-md-4">
             <h1>Most thundered</h1>
+
             <ul>
                 {% for deal in deals %}
                     <li>
                         <h2>{{ deal.Title }}</h2>
                         <p>{{ deal.Description }}</p>
-                        <p>Prix : {{ deal.Price }}</p>
-                        <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                        <p>Price: {{ deal.Price }}</p>
+                        <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                     </li>
                 {% endfor %}
             </ul>

@@ -1,21 +1,76 @@
 .navbar {
+    * {
+        font-size: 14px;
+    }
     .navbar-menu {
         .logo {
             width: 156px;
         }
 
         .nav-link {
-            font-size: .875rem;
             font-weight: 700;
             color: hsla(0, 0%, 100%, 0.8);
             
-            :hover {
-                color: #fff;
+            &:hover {
+                color: $white;
             }
         }
     }
-}
 
-.nav-item {
-    list-style-type: none;
+    .navbar-utilities {
+        .form-control {
+            width: 300px;
+            position: relative;
+            padding-left: 40px;
+            color: #8f949b;
+        }
+
+        .nav-item {
+            list-style: none;
+
+            .btn {
+                padding-left: 35px;
+                font-weight: bold;
+                color: $white;
+                border: 2px solid transparent;
+                transition: all .2s ease-in-out;
+
+                i {
+                    transform: translateX(-160%) translateY(-50%);
+                }
+            }
+
+            .btn-login {
+                background-color:#ffffff1a;
+                &:hover {
+                    box-shadow: 0 0 0 1px #5d5f62;
+                    background-color: #5d5f62;
+                }
+            }
+
+            .btn-logout {
+                background-color: red;
+            }
+
+            .btn-post {
+                background-color: $darkorange;
+                &:hover {
+                    box-shadow: 0 0 0 1px lighten($darkorange, 10%);
+                    background-color: lighten($darkorange, 10%);
+                }
+            }
+        }
+
+        .icon {
+            color: $white;
+            position: absolute;
+            top: 50%;
+            font-size: 16px;
+        }
+
+        .search-icon {
+            color: #8f949b;
+            transform: translateX(80%) translateY(-50%);
+        }
+    }
 }
