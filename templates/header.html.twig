@@ -43,12 +43,12 @@
     </div>
 </nav>
 <nav class="submenu">
-    <ul class="nav mx-auto p-2 wrapper-center">
+    <ul class="nav mx-auto wrapper-center">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">À la une</a>
+            <a class="nav-link{% if app.request.pathinfo == '/home' %} active{% endif %}" href="{{ path('app_home') }}">À la une</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_hot') }}">Hot</a>
+            <a class="nav-link{% if app.request.pathinfo == '/hot' %} active{% endif %}" href="{{ path('app_hot') }}">Hot</a>
         </li>
     </ul>
 </nav>

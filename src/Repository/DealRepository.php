@@ -39,20 +39,34 @@ class DealRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Deal[] Returns an array of Deal objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Deal[] Returns an array of featured deals
+    * (sorted by number of comments descending and only deals created in the last week)
+    */
+   public function findFeaturedDeals(): array
+   {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.createdAt > :lastWeek')
+            ->setParameter('lastWeek', new \DateTime('-1 week'))
+            ->leftJoin('d.comments', 'c')
+            ->orderBy('SIZE(d.comments)', 'DESC')
+            ->getQuery()
+            ->getResult();
+   }
+
+    /**
+    * @return Deal[] Returns an array of hot deals
+    * (more than 100° and sorted by publication date descending)
+    */
+    public function findHotDeals(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.notation > :hotNotation')
+            ->setParameter('hotNotation', 100)
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Deal
 //    {

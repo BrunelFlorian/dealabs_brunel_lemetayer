@@ -13,9 +13,11 @@ class HomeController extends AbstractController
     public function index(DealRepository $dealRepository): Response
     {
         $deals = $dealRepository->findAll();
+        $featuredDeals = $dealRepository->findFeaturedDeals();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'featuredDeals' => $featuredDeals,
             'deals' => $deals,
         ]);
     }

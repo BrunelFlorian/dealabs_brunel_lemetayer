@@ -11,10 +11,12 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-// import $ from 'jquery';
-const $ = require('jquery');
+import $ from 'jquery';
+global.$ = global.jQuery = $;
 
 // import 'bootstrap';
 require('bootstrap');
 
 import 'bootstrap/dist/css/bootstrap.css';
+
+import './js/ajax.js';

@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HotController!{% endblock %}
-
 {% block body %}
     <ul class="nav nav-underline mx-auto p-2 border-bottom">
         <li class="nav-item">
@@ -15,7 +13,7 @@
         <div class="col-sm-6 col-md-8">
             <h1>Hot deals</h1>
             <ul>
-                {% for deal in deals %}
+                {% for deal in hotDeals %}
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -38,7 +36,7 @@
             <h1>Most thundered</h1>
 
             <ul>
-                {% for deal in deals %}
+                {% for deal in hotDeals %}
                     <li>
                         <h2>{{ deal.Title }}</h2>
                         <p>{{ deal.Description }}</p>

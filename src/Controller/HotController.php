@@ -12,11 +12,11 @@ class HotController extends AbstractController
     #[Route('/hot', name: 'app_hot')]
     public function index(DealRepository $dealRepository): Response
     {
-        $deals = $dealRepository->findAll();
+        $hotDeals = $dealRepository->findHotDeals();
 
-        return $this->render('hot/index.html.twig', [
+        return $this->render('hot/hot.html.twig', [
             'controller_name' => 'HotController',
-            'deals' => $deals,
+            'hotDeals' => $hotDeals,
         ]);
     }
 }

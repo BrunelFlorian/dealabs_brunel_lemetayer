@@ -10,7 +10,6 @@
         .nav-link {
             font-weight: 700;
             color: hsla(0, 0%, 100%, 0.8);
-            
             &:hover {
                 color: $white;
             }
@@ -60,14 +59,12 @@
                 }
             }
         }
-
         .icon {
             color: $white;
             position: absolute;
             top: 50%;
             font-size: 16px;
         }
-
         .search-icon {
             color: #8f949b;
             transform: translateX(80%) translateY(-50%);
@@ -77,4 +74,20 @@
 
 .submenu {
     background-color: $white;
+    border-bottom: 1px solid #d1d5db;
+    .nav-link {
+        color: #63686d;
+        font-weight: 700;
+        font-size: .875rem;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        &:hover {
+            color: $darkorange;
+        }
+        &.active {
+            border-bottom: 3px solid $darkorange;
+        }
+    }
 }
+
+// text color : #35373b
