@@ -23,8 +23,12 @@
                                     </div>
                                     <h2>{{ deal.Title }}</h2>
                                     <p>{{ deal.Description }}</p>
-                                    <p>Prix : {{ deal.Price }}</p>
+                                    <p>{{ deal.Price }}€</p>
                                     <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary shape-circle show-deal">Voir le deal  <i class="fas fa-external-link-alt"></i></a> {#href="{{ path('deal_show', {'id': deal.id}) }}"#}
+                                    </div>
                                 </div>
                             </div>
                         </div>
