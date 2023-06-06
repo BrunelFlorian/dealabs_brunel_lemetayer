@@ -17,7 +17,7 @@
                                     <div class="container">
                                         <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
                                             <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
-                                            <p><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                            <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
                                             <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
                                         </div>
                                     </div>

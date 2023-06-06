@@ -1,15 +1,27 @@
 .rate-deal-container {
     border: 1px solid #d1d5db;
     align-items: center;
+    height: 34px;
 
     p {
+        font-weight: 700;
         color : #e00034;
     }
     
     .rate-deal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 26px;
+        height: 26px;
         &.decrease {
+            margin-left: 4px;
             &:hover {
                 background-color: #e6f8fc;
+            }
+
+            &:active {
+                border-color: transparent;
             }
 
             i {
@@ -18,14 +30,18 @@
         }
 
         &.increase {
+            margin-right: 4px;
             &:hover {
                 background-color: #fae8e6;
+            }
+
+            &:active {
+                border-color: transparent;
             }
 
             i {
                 color: #e00034;
             }
         }
-        
     }
 }
