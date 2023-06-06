@@ -68,6 +68,18 @@ class DealRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+    * @return Deal[] Returns an array of hottest deals
+    * (sorted by notation descending)
+    */
+    public function findHottestDeals(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.notation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    public function findOneBySomeField($value): ?Deal
 //    {
 //        return $this->createQueryBuilder('d')
