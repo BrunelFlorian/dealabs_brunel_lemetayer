@@ -15,9 +15,9 @@
                                 <div class="card-body">
                                     <div class="card-body">
                                     <div class="container">
-                                        <div class="btn-group" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}" data-id="{{ deal.id }}">
+                                        <div class="btn-group" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
                                             <button type="button" class="btn btn-primary shape-circle rate-deal" data-type="decrease">-</button>
-                                            <p><span>{{ deal.notation }}</span>°C</p>
+                                            <p><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°C</p>
                                             <button type="button" class="btn btn-primary shape-circle rate-deal" data-type="increase">+</button>
                                         </div>
                                     </div>

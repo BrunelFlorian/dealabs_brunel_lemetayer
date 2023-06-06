@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 $(document).ready(function () {    
     $('.rate-deal').on('click', function () {
-        console.log("toto");
         var url = $(this).parent().data('url');
         var type = 'POST';
         var data = { type: $(this).data('type') };
@@ -17,7 +16,7 @@ function makeAjaxRequest(url, type, data) {
         dataType: 'json',
         data: data,
         success: function (response) {
-            alert(response);
+            $('.notation-value-' + response.success.dealId).text(response.success.notation);
         },
         error: function (xhr, status, error) {
             alert(error);
