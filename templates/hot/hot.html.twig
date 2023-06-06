@@ -1,30 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul class="nav nav-underline mx-auto p-2 border-bottom">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">À la une</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Hot</a>
-        </li>
-    </ul>
-    <div class="row g-0 mx-auto p-2">
-        <div class="col-sm-6 col-md-8">
-            <h1>Hot deals</h1>
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <div class="col-9">
+            <h1>Deals list</h1>
             <ul>
                 {% for deal in hotDeals %}
-                    <div class="card mb-3">
+                    <div class="card mb-3 me-3">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="..." class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
+                                    <div class="card-body">
+                                    <div class="container">
+                                        <div class="btn-group" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                            <a class="btn btn-primary shape-circle rate-deal" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %}>-</a>
+                                            <p><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°C</p>
+                                            <a class="btn btn-primary shape-circle rate-deal" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %}>+</a>
+                                        </div>
+                                    </div>
                                     <h2>{{ deal.Title }}</h2>
                                     <p>{{ deal.Description }}</p>
-                                    <p>Price: {{ deal.Price }}</p>
-                                    <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                    <p>Prix : {{ deal.Price }}</p>
+                                    <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -32,16 +32,15 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-6 col-md-4">
+        <div class="card col-3">
             <h1>Most thundered</h1>
-
             <ul>
-                {% for deal in hotDeals %}
+                {% for deal in hotestDeals %}
                     <li>
                         <h2>{{ deal.Title }}</h2>
                         <p>{{ deal.Description }}</p>
-                        <p>Price: {{ deal.Price }}</p>
-                        <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                        <p>Prix : {{ deal.Price }}</p>
+                        <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                     </li>
                 {% endfor %}
             </ul>

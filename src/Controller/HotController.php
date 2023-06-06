@@ -13,10 +13,12 @@ class HotController extends AbstractController
     public function index(DealRepository $dealRepository): Response
     {
         $hotDeals = $dealRepository->findHotDeals();
+        $hotestDeals = $dealRepository->findHottestDeals();
 
         return $this->render('hot/hot.html.twig', [
             'controller_name' => 'HotController',
             'hotDeals' => $hotDeals,
+            'hotestDeals' => $hotestDeals,
         ]);
     }
 }

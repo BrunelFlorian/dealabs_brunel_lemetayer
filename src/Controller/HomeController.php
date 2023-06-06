@@ -14,11 +14,13 @@ class HomeController extends AbstractController
     {
         $deals = $dealRepository->findAll();
         $featuredDeals = $dealRepository->findFeaturedDeals();
+        $hotestDeals = $dealRepository->findHottestDeals();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'featuredDeals' => $featuredDeals,
             'deals' => $deals,
+            'hotestDeals' => $hotestDeals,
         ]);
     }
 }
