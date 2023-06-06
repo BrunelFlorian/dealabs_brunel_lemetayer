@@ -19,7 +19,11 @@ function makeAjaxRequest(url, type, data) {
             $('.notation-value-' + response.success.dealId).text(response.success.notation);
         },
         error: function (xhr, status, error) {
-            alert(error);
+            $('.deal-list').prepend('<div class="alert alert-danger" role="alert">' + xhr.responseJSON.error + '</div>');
+
+            setTimeout(function () {
+                $('.alert-danger').remove();
+            }, 10000);
         }
     });
 }

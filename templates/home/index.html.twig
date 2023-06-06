@@ -4,7 +4,7 @@
     <div class="row g-0 mx-auto p-2 wrapper-center">
         <div class="col-9">
             <h1>Deals list</h1>
-            <ul>
+            <ul class="deal-list">
                 {% for deal in featuredDeals %}
                     <div class="card mb-3 me-3">
                         <div class="row g-0">
@@ -25,9 +25,8 @@
                                     <p>{{ deal.Description }}</p>
                                     <p>{{ deal.Price }}€</p>
                                     <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
-
                                     <div class="d-flex justify-content-end">
-                                        <a class="btn btn-primary shape-circle show-deal">Voir le deal  <i class="fas fa-external-link-alt"></i></a> {#href="{{ path('deal_show', {'id': deal.id}) }}"#}
+                                        <a class="btn btn-primary shape-circle show-deal">Voir le deal <i class="fas fa-external-link-alt"></i></a> {#href="{{ path('deal_show', {'id': deal.id}) }}"#}
                                     </div>
                                 </div>
                             </div>
