@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <h1>Coupons list</h1>
+        <ul class="deal-list">
+            {% for coupon in coupons %}
+                <div class="card mb-3 me-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': coupon.id}) }}">
+                                        <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                        <p class="px-1"><span class="notation-value-{{ coupon.id }}">{{ coupon.notation }}</span>°</p>
+                                        <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
+                                    </div>
+                                </div>
+                                <h2>{{ coupon.Title }}</h2>
+                                <p>{{ coupon.Description }}</p>
+                                <p>{{ coupon.Price }}€</p>
+                                <p>Expiration date: {{ coupon.ExpirationDate|date('d/m/Y') }}</p>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': coupon.id}) }}">Show code<i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

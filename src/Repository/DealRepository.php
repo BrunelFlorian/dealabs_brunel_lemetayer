@@ -61,8 +61,10 @@ class DealRepository extends ServiceEntityRepository
     public function findHotDeals(): array
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.notation > :hotNotation')
-            ->setParameter('hotNotation', 100)
+            ->andWhere('d.notation > :notation')
+            ->setParameter('notation', 100)
+            ->andWhere('d.category = :category')
+            ->setParameter('category', 'tips')
             ->orderBy('d.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
@@ -75,18 +77,24 @@ class DealRepository extends ServiceEntityRepository
     public function findHottestDeals(): array
     {
         return $this->createQueryBuilder('d')
+            ->andWhere('d.category = :category')
+            ->setParameter('category', 'tips')
             ->orderBy('d.notation', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-//    public function findOneBySomeField($value): ?Deal
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Deal[] Returns an array of deals
+     * (of category Coupon)
+     */
+    public function findCoupons(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.category = :category')
+            ->setParameter('category', 'Coupon')
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

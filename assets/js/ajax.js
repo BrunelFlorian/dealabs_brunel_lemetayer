@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 $(document).ready(function () {    
     $('.rate-deal').on('click', function () {
         var url = $(this).parent().data('url');

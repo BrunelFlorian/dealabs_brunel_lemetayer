@@ -20,9 +20,9 @@ class AppFixtures extends Fixture
             $deal->setDescription($faker->paragraph());
             $deal->setNotation($faker->numberBetween(1, 100));
             $deal->setUserCreated(1);
-            $deal->setDate($faker->dateTimeBetween('-1 year', 'now'));
+            $deal->setCreatedAt($faker->dateTimeBetween('-1 year', 'now'));
             $deal->setExpirationDate($faker->dateTimeBetween('now', '+1 year'));
-            $deal->setCategory($faker->randomElement(['Tips', 'Coupon code']));
+            $deal->setCategory($faker->randomElement(['Tips', 'Coupon']));
 
             $manager->persist($deal);
         }

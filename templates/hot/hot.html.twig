@@ -8,12 +8,11 @@
                 {% for deal in hotDeals %}
                     <div class="card mb-3 me-3">
                         <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <div class="card-body">
                                     <div class="container">
                                         <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
                                             <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
@@ -24,7 +23,10 @@
                                     <h2>{{ deal.Title }}</h2>
                                     <p>{{ deal.Description }}</p>
                                     <p>{{ deal.Price }}€</p>
-                                    <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                    <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -39,8 +41,8 @@
                     <li>
                         <h2>{{ deal.Title }}</h2>
                         <p>{{ deal.Description }}</p>
-                        <p>Prix : {{ deal.Price }}</p>
-                        <p>Date d'expiration : {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                        <p>Price: {{ deal.Price }}</p>
+                        <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                     </li>
                 {% endfor %}
             </ul>

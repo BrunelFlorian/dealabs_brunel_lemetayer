@@ -71,7 +71,9 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+
+    // Images
     .addRule({
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         use: [{
@@ -85,6 +87,6 @@ Encore
         from: './assets/images',
         to: 'images/[path][name].[ext]',
         pattern: /\.(png|jpg|jpeg|gif|svg|ico)$/,
-    });
+    })
 
 module.exports = Encore.getWebpackConfig();
