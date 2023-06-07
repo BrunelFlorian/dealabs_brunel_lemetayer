@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a Deal{% endblock %}
+
+{% block body %}
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <h1>Create a Deal</h1>
+
+        <div class="row mb-3">
+            <div class="col-md-6 offset-md-3">
+                {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                    {# <div class="form-group">
+                        {{ form_label(form.link, 'Deal Link') }}
+                        {{ form_widget(form.link, {'attr': {'class': 'form-control', 'placeholder': 'Lien du deal'}}) }}
+                        {{ form_errors(form.link) }}
+                    </div> #}
+
+                    <div class="form-group">
+                        {{ form_label(form.title, 'Title') }}
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Title'}}) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.price, 'Price') }}
+                        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
+                        {{ form_errors(form.price) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.description, 'Description') }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.expirationDate, 'Expiration Date') }}
+                        {{ form_widget(form.expirationDate, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.expirationDate) }}
+                    </div>
+
+                    {# <div class="form-group">
+                        {{ form_label(form.image, 'Image') }}
+                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.image) }}
+                    </div> #}
+
+                    <button type="submit" class="btn btn-primary">Create</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        
+        <h2>Overview</h2>
+        <div class="card mb-3 me-3">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="btn-group rate-deal-container shape-circle">
+                                <a class="btn shape-circle rate-deal decrease" title="Negative vote"><i class="fas fa-minus"></i></a>
+                                <p class="px-1">Nouveau</p>
+                                <a class="btn shape-circle rate-deal increase" title="Positive vote"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <h2> </h2>
+                        <p> </p>
+                        <p> 0.00 €</p>
+                        <p>Expiration date: </p>
+                        <div class="d-flex justify-content-end">
+                            <a class="btn btn-primary shape-circle show-deal">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path('app_home') }}">Back to home page</a>
+    </div>
+{% endblock %}
