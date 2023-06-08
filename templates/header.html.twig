@@ -19,10 +19,16 @@
                 <i class="icon search-icon fas fa-search"></i>
             </form>
             {% if app.user %}
-                <li class="nav-item ms-2">
+                <li class="nav-item ms-2 me-2">
                     <a href="{{ path('app_logout') }}" class="btn btn-logout shape-circle">
                         <i class="icon fas fa-right-from-bracket"></i>
                         Logout
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_post') }}" class="btn btn-post shape-circle">
+                        <i class="icon fas fa-plus"></i>
+                        Post...
                     </a>
                 </li>
             {% else %}
@@ -33,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('app_post') }}" class="btn btn-post shape-circle">
+                    <a href="{{ path('app_login') }}" class="btn btn-post shape-circle">
                         <i class="icon fas fa-plus"></i>
                         Post...
                     </a>

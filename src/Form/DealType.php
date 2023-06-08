@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,7 +34,19 @@ class DealType extends AbstractType
             ->add('expirationDate', DateTimeType::class, [
                 'label' => 'Expiration Date',
                 'widget' => 'single_text',
+            ])
+            ->add('category', ChoiceType::class, [
+                'label' => 'Category',
+                'choices' => [
+                    'Tips' => 'tips',
+                    'Coupon code' => 'coupon_code',
+                ],
+                'expanded' => true, // Set to true if you want radio buttons instead of a dropdown select
+                // 'multiple' => false, // Set to true if you want to allow selecting multiple categories
             ]);
+                     
+
+
             // ->add('image', FileType::class, [
             //     'label' => 'Image',
             //     'required' => false,

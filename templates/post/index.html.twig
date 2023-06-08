@@ -17,26 +17,32 @@
 
                     <div class="form-group">
                         {{ form_label(form.title, 'Title') }}
-                        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Title'}}) }}
+                        {{ form_widget(form.title, {'attr': {'id': 'deal-title', 'class': 'form-control', 'placeholder': 'Title'}}) }}
                         {{ form_errors(form.title) }}
                     </div>
 
                     <div class="form-group">
                         {{ form_label(form.price, 'Price') }}
-                        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
+                        {{ form_widget(form.price, {'attr': {'id': 'deal-price', 'class': 'form-control', 'placeholder': 'Price'}}) }}
                         {{ form_errors(form.price) }}
                     </div>
 
                     <div class="form-group">
                         {{ form_label(form.description, 'Description') }}
-                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+                        {{ form_widget(form.description, {'attr': {'id': 'deal-description', 'class': 'form-control', 'placeholder': 'Description'}}) }}
                         {{ form_errors(form.description) }}
                     </div>
 
                     <div class="form-group">
                         {{ form_label(form.expirationDate, 'Expiration Date') }}
-                        {{ form_widget(form.expirationDate, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_widget(form.expirationDate, {'attr': {'id': 'deal-expiration-date', 'class': 'form-control'}}) }}
                         {{ form_errors(form.expirationDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.category, 'Category') }}
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.category) }}
                     </div>
 
                     {# <div class="form-group">
@@ -65,10 +71,10 @@
                                 <a class="btn shape-circle rate-deal increase" title="Positive vote"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
-                        <h2> </h2>
-                        <p> </p>
-                        <p> 0.00 €</p>
-                        <p>Expiration date: </p>
+                        <h2 id="deal-title-preview"></h2>
+                        <p id="deal-description-preview"></p>
+                        <p id="deal-price-preview"> €</p>
+                        <p id"deal-date-preview">Expiration date: </p>
                         <div class="d-flex justify-content-end">
                             <a class="btn btn-primary shape-circle show-deal">Voir le deal <i class="fas fa-external-link-alt"></i></a>
                         </div>
@@ -80,3 +86,48 @@
         <a href="{{ path('app_home') }}">Back to home page</a>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        //document.addEventListener('DOMContentLoaded', function() {
+        function myFunction() {
+            // Sélectionnez les champs du formulaire
+            var titleField = document.querySelector('#deal-title');
+            var descriptionField = document.querySelector('#deal-description');
+            var priceField = document.querySelector('#deal-price');
+            var expirationDateField = document.querySelector('#deal-expiration-date');
+
+            // Sélectionnez les éléments de l'aperçu du deal
+            var titlePreview = document.querySelector('#deal-title-preview');
+            var descriptionPreview = document.querySelector('#deal-description-preview');
+            var pricePreview = document.querySelector('#deal-price-preview');
+            var datePreview = document.querySelector('#deal-date-preview');
+
+            // Écoutez l'événement de modification du champ de titre
+            titleField.onchange = function() {
+                titlePreview.textContent = titleField.value;
+                console.log(titleField.value);
+            };
+
+            // Écoutez l'événement de modification du champ de description
+            descriptionField.onchange = function() {
+                descriptionPreview.textContent = descriptionField.value;
+                console.log(descriptionField.value);
+            };
+
+            // Écoutez l'événement de modification du champ de prix
+            priceField.onchange = function() {
+                pricePreview.textContent = priceField.value + '€';
+                console.log(priceField.value);
+            };
+
+            // Écoutez l'événement de modification du champ de date d'expiration
+            expirationDateField.onchange = function() {
+                datePreview.textContent = 'Expiration date: ' + expirationDateField.value;
+                console.log(expirationDateField.value);
+            };
+        }
+        //});
+    </script>
+{% endblock %}
+
