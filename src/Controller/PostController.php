@@ -27,7 +27,7 @@ class PostController extends AbstractController
             $deal->setDescription($form->get('description')->getData());
             $deal->setExpirationDate($form->get('expirationDate')->getData());
             $deal->setUserCreated($this->getUser()->getId());
-            $deal->setCreatedAt(new \DateTime());
+            $deal->setCreatedAt(new \DateTimeImmutable());
             $deal->setCategory($form->get('category')->getData());
             $deal->setNotation(0);
             
