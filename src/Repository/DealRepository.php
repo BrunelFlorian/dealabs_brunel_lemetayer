@@ -63,8 +63,6 @@ class DealRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->andWhere('d.notation > :notation')
             ->setParameter('notation', 100)
-            ->andWhere('d.category = :category')
-            ->setParameter('category', 'tips')
             ->orderBy('d.createdAt', 'DESC')
             ->getQuery()
             ->getResult();

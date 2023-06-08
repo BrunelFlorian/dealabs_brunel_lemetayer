@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Deal;
-use App\Form\DealType;
+use App\Form\PostFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class PostController extends AbstractController
     public function post(Request $request, EntityManagerInterface $entityManager): Response
     {
         $deal = new Deal();
-        $form = $this->createForm(DealType::class, $deal);
+        $form = $this->createForm(PostFormType::class, $deal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,7 +37,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('post/index.html.twig', [
+        return $this->render('post/post.html.twig', [
             'form' => $form->createView(),
         ]);
     }

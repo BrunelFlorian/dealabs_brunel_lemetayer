@@ -13,6 +13,14 @@ import './bootstrap';
 
 // import 'bootstrap';
 require('bootstrap');
-
 import 'bootstrap/dist/css/bootstrap.css';
+
+// import slick-slider
+import 'slick-slider/slick/slick.scss';
+import 'slick-slider/slick/slick-theme.scss';
+import 'slick-slider/slick/slick.min.js';
+
+// import all js files
 import './js/ajax.js';
+import './js/slick.js';
+import './js/preview.js';

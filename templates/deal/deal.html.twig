@@ -43,4 +43,28 @@
             </ul>
         </div>
     </div>
+    {# espace commentaires #}
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <div class="col-9">
+            <h1>Comments</h1>
+            <div class="card mb-3 me-3">
+                <div class="row g-0">
+                    <div class="card-body">
+                        {{ form_start(commentForm, {'action': path('app_deal', {'id': deal.id}) }) }}
+                            {{ form_widget(commentForm.content, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_widget(commentForm.submit, { 'attr': {'class': 'btn btn-primary mt-3'} }) }}
+                        {{ form_end(commentForm) }}
+                    </div>
+                    {% for comment in comments %}
+                        <div class="card">
+                            <div class="card-body">
+                                <p>{{ comment.content }}</p>
+                                <p>{{ comment.createdAt|date('d/m/Y') }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
