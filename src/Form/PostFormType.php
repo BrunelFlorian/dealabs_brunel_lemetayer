@@ -27,7 +27,7 @@ class PostFormType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description'
             ])
-            ->add('expirationdate', DateTimeType::class, [
+            ->add('expirationDate', DateTimeType::class, [
                 'label' => 'Expiration Date',
                 'widget' => 'single_text',
             ])
