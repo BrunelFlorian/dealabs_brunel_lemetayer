@@ -69,15 +69,16 @@ class DealRepository extends ServiceEntityRepository
     }
 
     /**
-    * @return Deal[] Returns an array of hottest deals
+    * @return Deal[] Returns an array of the sixteen hottest deals
     * (sorted by notation descending)
     */
     public function findHottestDeals(): array
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.category = :category')
+            ->andWhere('d.category = :category')    
             ->setParameter('category', 'tips')
             ->orderBy('d.notation', 'DESC')
+            ->setMaxResults(16)
             ->getQuery()
             ->getResult();
     }
