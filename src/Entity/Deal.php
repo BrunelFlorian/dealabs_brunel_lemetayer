@@ -47,6 +47,10 @@ class Deal
     #[ORM\OneToMany(mappedBy: 'deal', targetEntity: Rating::class, orphanRemoval: true)]
     private Collection $ratings;
 
+    #[ORM\ManyToOne(inversedBy: 'deals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?DealGroup $dealGroup = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -216,6 +220,18 @@ class Deal
                 $rating->setDeal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDealGroup(): ?DealGroup
+    {
+        return $this->dealGroup;
+    }
+
+    public function setDealGroup(?DealGroup $dealGroup): self
+    {
+        $this->dealGroup = $dealGroup;
 
         return $this;
     }
