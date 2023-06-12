@@ -29,8 +29,13 @@ class DealController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->getUser()) {
+                $this->addFlash('warning', 'You must be logged in to post a comment');
+                return $this->redirectToRoute('app_login');
+            }
+            
             // Définir les valeurs du commentaire
             $comment->setUser($this->getUser());
             $comment->setDeal($deal);
