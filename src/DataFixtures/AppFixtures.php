@@ -18,12 +18,12 @@ class AppFixtures extends Fixture
         $dealGroups = [];
 
         for ($i = 0; $i < 5; $i++) {
-            $deal = new DealGroup();
-            $deal->setName($faker->sentence(1));
+            $dealGroup = new DealGroup();
+            $dealGroup->setName($faker->sentence(1));
             
-            $manager->persist($deal);
+            $manager->persist($dealGroup);
             
-            $dealGroups[] = $deal;
+            $dealGroups[] = $dealGroup;
         }
         
         for ($i = 0; $i < 10; $i++) {
