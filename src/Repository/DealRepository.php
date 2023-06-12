@@ -96,4 +96,18 @@ class DealRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return Deal[] Returns an array of deals by group^
+     * @param int $group_id The id of the deal group
+     */
+    public function findDealsByGroup(int $group_id): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.dealGroup = :group_id')
+            ->setParameter('group_id', $group_id)
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

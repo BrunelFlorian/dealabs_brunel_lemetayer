@@ -35,8 +35,8 @@ class Deal
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $expirationDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $expirationDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $category = null;
@@ -140,12 +140,12 @@ class Deal
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getExpirationDate(): ?\DateTimeInterface
+    public function getExpirationDate(): ?\DateTimeImmutable
     {
         return $this->expirationDate;
     }
 
-    public function setExpirationDate(\DateTimeInterface $expirationDate): self
+    public function setExpirationDate(\DateTimeImmutable $expirationDate): self
     {
         $this->expirationDate = $expirationDate;
 

@@ -38,12 +38,18 @@
         <div class="card col-3">
             <ul class="slick-slider">
                 {% for deal in hotestDeals %}
-                    <li>
-                        <h2>{{ deal.Title }}</h2>
-                        <p>{{ deal.Description }}</p>
-                        <p>Price: {{ deal.Price }}</p>
-                        <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
-                    </li>
+                    {% if loop.index is divisible by(4) %}
+                        <div class="slider-container">
+                    {% endif %}
+                        <li>
+                            <h2>{{ deal.Title }}</h2>
+                            <p>{{ deal.Description }}</p>
+                            <p>Price: {{ deal.Price }}</p>
+                            <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                        </li>
+                    {% if loop.index is divisible by(4) %}
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
