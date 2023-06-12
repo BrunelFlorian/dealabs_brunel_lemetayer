@@ -15,14 +15,15 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        $dealGroupsID = [];
+        $dealGroups = [];
 
         for ($i = 0; $i < 5; $i++) {
             $deal = new DealGroup();
             $deal->setName($faker->sentence(1));
-            $dealGroupsID = $deal->getId();
-
+            
             $manager->persist($deal);
+            
+            $dealGroups[] = $deal;
         }
         
         for ($i = 0; $i < 10; $i++) {
@@ -37,7 +38,7 @@ class AppFixtures extends Fixture
             $expirationDate = $faker->dateTimeBetween('now', '+1 year');
             $deal->setExpirationDate(DateTimeImmutable::createFromMutable($expirationDate));
             $deal->setCategory($faker->randomElement(['Tips', 'Coupon']));
-            $deal->setDealGroup($faker->randomElement($dealGroupsID));
+            $deal->setDealGroup($faker->randomElement($dealGroups));
 
             $manager->persist($deal);
         }
