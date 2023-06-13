@@ -1,35 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DealController!{% endblock %}
+{% block title %}{{ deal.Title }} Details{% endblock %}
 
 {% block body %}
 <div class="row g-0 mx-auto p-2 wrapper-center">
-        <div class="col-9">
-            <h1>Deal detail</h1>
-            <div class="card mb-3 me-3">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex justify-content-center align-items-center">
-                        <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <div class="container">
-                                <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
-                                    <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
-                                    <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
-                                    <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
-                                </div>
+    {# card du deal #}
+    <div class="col-md-9">
+        <h1>Deal detail</h1>
+        <div class="card mb-3 me-3">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
                             </div>
-                            <h2>{{ deal.Title }}</h2>
-                            <p>{{ deal.Description }}</p>
-                            <p>{{ deal.Price }}€</p>
-                            <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                         </div>
+                        <h2>{{ deal.Title }}</h2>
+                        <p>{{ deal.Description }}</p>
+                        <p>{{ deal.Price }}€</p>
+                        <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card col-3">
+    </div>
+    {# colonne de droite #}
+    <div class="col-md-3">
+        <div class="card">
             <h1>Most thundered</h1>
             <ul>
                 {% for deal in hotestDeals %}
@@ -43,28 +46,50 @@
             </ul>
         </div>
     </div>
-    {# espace commentaires #}
-    <div class="row g-0 mx-auto p-2 wrapper-center">
-        <div class="col-9">
-            <h1>Comments</h1>
-            <div class="card mb-3 me-3">
-                <div class="row g-0">
-                    <div class="card-body">
-                        {{ form_start(commentForm, {'action': path('app_deal', {'id': deal.id}) }) }}
-                            {{ form_widget(commentForm.content, { 'attr': {'class': 'form-control'} }) }}
-                            {{ form_widget(commentForm.submit, { 'attr': {'class': 'btn btn-primary mt-3'} }) }}
-                        {{ form_end(commentForm) }}
-                    </div>
-                    {% for comment in comments %}
-                        <div class="card">
-                            <div class="card-body">
-                                <p>{{ comment.content }}</p>
-                                <p>{{ comment.createdAt|date('d/m/Y') }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
+</div>
+
+{# espace sauvegarde et signalement #}
+<div class="row g-0 mx-auto p-2 wrapper-center">
+    <div class="col-md-9">
+        <div class="d-flex justify-content-between">
+            {% if app.user %}
+                <a href="{{ path('app_deals') }}" class="btn btn-primary">Save</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="btn btn-primary">Save</a>
+            {% endif %}
+            {% if app.user %}
+                <a href="{{ path('app_deals') }}" class="btn btn-primary">Report</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="btn btn-primary">Report</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{# espace commentaires #}
+<div class="row g-0 mx-auto p-2 wrapper-center">
+    <div class="col-md-9">
+        <h1>Comments</h1>
+        <div class="card mb-3 me-3">
+            <div class="row g-0">
+                <div class="card-body">
+                    {{ form_start(commentForm, {'action': path('app_deal', {'id': deal.id}) }) }}
+                        {{ form_widget(commentForm.content, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_widget(commentForm.submit, { 'attr': {'class': 'btn btn-primary mt-3'} }) }}
+                    {{ form_end(commentForm) }}
                 </div>
+                {% for comment in comments %}
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{ comment.content }}</p>
+                            <p>{{ comment.userPseudo }}</p>
+                            <p>{{ comment.createdAt|date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
+
