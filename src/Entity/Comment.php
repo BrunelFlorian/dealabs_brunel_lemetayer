@@ -29,6 +29,9 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Deal $deal = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $userPseudo = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -58,12 +61,6 @@ class Comment
         return $this;
     }
 
-    #[ORM\PrePersist]
-    public function prePersist(): void
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -86,5 +83,23 @@ class Comment
         $this->deal = $deal;
 
         return $this;
+    }
+
+    public function getUserPseudo(): ?string
+    {
+        return $this->userPseudo;
+    }
+
+    public function setUserPseudo(?string $userPseudo): self
+    {
+        $this->userPseudo = $userPseudo;
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->userPseudo = $this->user ? $this->user->getPseudo() : null;
     }
 }

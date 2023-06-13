@@ -25,7 +25,7 @@ class DealController extends AbstractController
             throw $this->createNotFoundException('Deal not found');
         }
 
-        // Création du formulaire de commentaire
+        // Comments form
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
@@ -35,16 +35,15 @@ class DealController extends AbstractController
                 $this->addFlash('warning', 'You must be logged in to post a comment');
                 return $this->redirectToRoute('app_login');
             }
-            
-            // Définir les valeurs du commentaire
+
             $comment->setUser($this->getUser());
             $comment->setDeal($deal);
             $comment->setContent($form->get('content')->getData());
+            $comment->setUserPseudo($this->getUser()->getUserPseudo());
 
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            // Rediriger ou effectuer d'autres actions après l'enregistrement du commentaire
             return $this->redirectToRoute('app_deal', ['id' => $deal->getId()]);
         }
 
