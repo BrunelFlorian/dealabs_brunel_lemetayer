@@ -51,6 +51,9 @@ class Deal
     #[ORM\JoinColumn(nullable: false)]
     private ?DealGroup $dealGroup = null;
 
+    #[ORM\Column(type: "integer", nullable: true)]
+    private ?int $reports = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -134,12 +137,6 @@ class Deal
         return $this;
     }
 
-    #[ORM\PrePersist]
-    public function prePersist(): void
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
-
     public function getExpirationDate(): ?\DateTimeImmutable
     {
         return $this->expirationDate;
@@ -160,6 +157,30 @@ class Deal
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDealGroup(): ?DealGroup
+    {
+        return $this->dealGroup;
+    }
+
+    public function setDealGroup(?DealGroup $dealGroup): self
+    {
+        $this->dealGroup = $dealGroup;
+
+        return $this;
+    }
+
+    public function getReports(): ?int
+    {
+        return $this->reports;
+    }
+
+    public function setReports(?int $reports): self
+    {
+        $this->reports = $reports;
 
         return $this;
     }
@@ -224,15 +245,9 @@ class Deal
         return $this;
     }
 
-    public function getDealGroup(): ?DealGroup
+    #[ORM\PrePersist]
+    public function prePersist(): void
     {
-        return $this->dealGroup;
-    }
-
-    public function setDealGroup(?DealGroup $dealGroup): self
-    {
-        $this->dealGroup = $dealGroup;
-
-        return $this;
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
