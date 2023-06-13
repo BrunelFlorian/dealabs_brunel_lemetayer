@@ -13,7 +13,7 @@ class DealGroupController extends AbstractController
     public function index(DealRepository $dealRepository, int $id): Response
     {
         $dealsByGroup = $dealRepository->findDealsByGroup($id);
-        return $this->render('deal_group/deal_group..html.twig', [
+        return $this->render('deal_group/deal_group.html.twig', [
             'deals' => $dealsByGroup,
         ]);
     }

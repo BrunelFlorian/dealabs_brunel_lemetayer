@@ -45,7 +45,7 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+    </div
 </div>
 
 {# espace sauvegarde et signalement #}
@@ -53,12 +53,12 @@
     <div class="col-md-9">
         <div class="d-flex justify-content-between">
             {% if app.user %}
-                <a href="{{ path('app_deals') }}" class="btn btn-primary">Save</a>
+                <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary">Save</a>
             {% else %}
                 <a href="{{ path('app_login') }}" class="btn btn-primary">Save</a>
             {% endif %}
             {% if app.user %}
-                <a href="{{ path('app_deals') }}" class="btn btn-primary">Report</a>
+                <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary">Report</a>
             {% else %}
                 <a href="{{ path('app_login') }}" class="btn btn-primary">Report</a>
             {% endif %}

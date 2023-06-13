@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DealGroupController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/brufl/projets/projets_lp/php/dealabs/src/Controller/DealGroupController.php'|file_link(0) }}">src/Controller/DealGroupController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/brufl/projets/projets_lp/php/dealabs/templates/deal_group/index.html.twig'|file_link(0) }}">templates/deal_group/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <div class="col-9">
+            <h1>Deals list</h1>
+            <ul class="deal-list">
+                {% for deal in featuredDeals %}
+                    <div class="card mb-3 me-3">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                            <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                            <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                            <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    <h2>{{ deal.Title }}</h2>
+                                    <p>{{ deal.Description }}</p>
+                                    <p>{{ deal.Price }}€</p>
+                                    <p>Expiration date: {{ deal.ExpirationDate|date('d/m/Y') }}</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
