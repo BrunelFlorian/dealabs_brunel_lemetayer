@@ -18,6 +18,8 @@ framework:
     php_errors:
         log: true
 
+    fragments: { path: /_menu }
+
 when@test:
     framework:
         test: true

@@ -3,13 +3,27 @@
         <div class="navbar-menu d-flex flex-row align-items-center">
             <a class="navbar-brand m-0" href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/images/logo-header.png') }}" alt="Logo"></a>
             <div class="navbar-links">
-                <ul class="navbar-nav flex-row mr-auto fw-bold">
+                <ul class="navbar-nav flex-row align-items-center mr-auto fw-bold">
                     <li class="nav-item ms-3 me-2">
                         <a class="nav-link" href="{{ path('app_hot') }}">Good deals</a>
                     </li>
                     <li class="nav-item ms-2 me-3">
                         <a class="nav-link" href="{{ path('app_coupon') }}">Coupon codes</a>
                     </li>
+
+
+                    <div class="dropdown">
+                        <a class="btn nav-link menu-button shape-circle d-flex align-items-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            {{ render(controller('App\\Controller\\DealGroupMenuController::showDealGroupMenu')) }}
+                        </ul>
+                    </div>
+
+
+
+
                 </ul>
             </div>
         </div>

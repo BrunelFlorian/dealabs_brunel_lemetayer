@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Deal;
+use App\Entity\DealGroup;
+use App\Repository\DealGroupRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -14,8 +17,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PostFormType extends AbstractType
 {
+    private $dealGroupRepository;
+
+    public function __construct(DealGroupRepository $dealGroupRepository)
+    {
+        $this->dealGroupRepository = $dealGroupRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $groups = $this->dealGroupRepository->findAll();
+
+        $groupChoices = [];
+        foreach ($groups as $group) {
+            $groupChoices[$group->getName()] = $group->getId();
+        }
+
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Title'
@@ -28,6 +45,7 @@ class PostFormType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('expirationDate', DateTimeType::class, [
+                'input' => 'datetime_immutable',
                 'label' => 'Expiration Date',
                 'widget' => 'single_text',
             ])
@@ -37,8 +55,13 @@ class PostFormType extends AbstractType
                     'Tips' => 'tips',
                     'Coupon code' => 'coupon_code',
                 ],
-                'expanded' => true, // Set to true if you want radio buttons instead of a dropdown select
-                // 'multiple' => false, // Set to true if you want to allow selecting multiple categories
+                'expanded' => true,
+            ])
+            ->add('dealGroup', EntityType::class, [
+                'label' => 'Group',
+                'class' => DealGroup::class,
+                'choice_label' => 'name',
+                'choice_value' => 'id',
             ])
         ;
     }

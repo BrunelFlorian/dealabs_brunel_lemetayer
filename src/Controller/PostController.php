@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Deal;
 use App\Form\PostFormType;
+use App\Repository\DealGroupRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class PostController extends AbstractController
 {
     #[Route('/post', name: 'app_post')]
-    public function post(Request $request, EntityManagerInterface $entityManager): Response
+    public function post(Request $request, EntityManagerInterface $entityManager, DealGroupRepository $dealGroupRepository): Response
     {
         $deal = new Deal();
         $form = $this->createForm(PostFormType::class, $deal);
@@ -29,6 +30,7 @@ class PostController extends AbstractController
             $deal->setUserCreated($this->getUser()->getId());
             $deal->setCreatedAt(new \DateTimeImmutable());
             $deal->setCategory($form->get('category')->getData());
+            $deal->setDealGroup($dealGroupRepository->find($form->get('dealGroup')->getData()));
             $deal->setNotation(0);
             
             $entityManager->persist($deal);

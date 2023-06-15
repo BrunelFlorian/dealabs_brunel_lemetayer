@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}DealStorm - {{ dealGroup.name }}{% endblock %}
+
 {% block body %}
     <div class="row g-0 mx-auto p-2 wrapper-center">
         <div class="col-9">
-            <h1>Deals list</h1>
+            <h1>{{ dealGroup.name }}</h1>
             <ul class="deal-list">
-                {% for deal in featuredDeals %}
+                {% for deal in deals %}
                     <div class="card mb-3 me-3">
                         <div class="row g-0">
                             <div class="col-md-4 d-flex justify-content-center align-items-center">

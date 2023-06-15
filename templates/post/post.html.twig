@@ -32,7 +32,12 @@
                     {{ form_widget(form.category, {'attr': {'class': 'post-el'}}) }}
                     {{ form_errors(form.category) }}
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <div class="form-group">
+                    {{ form_label(form.dealGroup, 'Group') }}
+                    {{ form_widget(form.dealGroup, {'attr': {'class': 'post-el'}}) }}
+                    {{ form_errors(form.dealGroup) }}
+                </div>
+                <button type="submit" class="btn btn-primary my-2">Create</button>
             {{ form_end(form) }}
         </div>
         <div class="col-8 d-flex flex-column justify-content-center ms-4">
