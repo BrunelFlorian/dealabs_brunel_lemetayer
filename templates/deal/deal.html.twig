@@ -35,28 +35,18 @@
                     {% endif %}
                     {% if app.user %}
                         <div class="btn-group">
-                        <a href="{{ path('app_deal_increment_reports', {'id': deal.id}) }}" class="btn btn-primary mb-2" id="report-button">Report <i class="fas fa-flag"></i></a>
-                        <div id="report-form" style="display: none;">
-                            <form action="{{ path('app_deal', {'id': deal.id}) }}" method="POST" class="d-flex">
-                            <input type="text" name="reason" placeholder="Enter reason for report" required class="form-control me-2 mb-2">
-                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                            </form>
-                        </div>
+                            <a href="{{ path('app_deal_increment_reports', {'id': deal.id}) }}" class="btn btn-primary mb-2" id="report-button">Report <i class="fas fa-flag"></i></a>
+                            <div id="report-form" style="display: none;">
+                                <form action="{{ path('app_deal', {'id': deal.id}) }}" method="POST" class="d-flex">
+                                <input type="text" name="reason" placeholder="Enter reason for report" required class="form-control me-2 mb-2">
+                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     {% else %}
-                        <a href="{{ path('app_login') }}" class="btn btn-primary mb-2">Report</a>
+                        <a href="{{ path('app_login') }}" class="btn btn-primary mb-2">Report <i class="fas fa-flag"></i></a>
                     {% endif %}
-                    </div>
-
-                    <script>
-                    const reportButton = document.getElementById('report-button');
-                    const reportForm = document.getElementById('report-form');
-
-                    reportButton.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        reportForm.style.display = 'block';
-                    });
-                    </script>
+                </div>
             </div>
         </div>
     </div>
@@ -77,24 +67,6 @@
         </div>
     </div
 </div>
-
-{# espace sauvegarde et signalement #}
-{# <div class="row g-0 mx-auto p-2 wrapper-center">
-    <div class="col-md-9">
-        <div class="d-flex justify-content-between">
-            {% if app.user %}
-                <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary">Save</a>
-            {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-primary">Save</a>
-            {% endif %}
-            {% if app.user %}
-                <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary">Report</a>
-            {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-primary">Report</a>
-            {% endif %}
-        </div>
-    </div>
-</div> #}
 
 {# espace commentaires #}
 <div class="row g-0 mx-auto p-2 wrapper-center">

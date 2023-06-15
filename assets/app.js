@@ -24,3 +24,5 @@ import 'slick-slider/slick/slick.min.js';
 import './js/ajax.js';
 import './js/slick.js';
 import './js/preview.js';
+import './js/header.js';
+import './js/report.js';
