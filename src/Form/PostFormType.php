@@ -44,11 +44,6 @@ class PostFormType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description'
             ])
-            ->add('expirationDate', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'label' => 'Expiration Date',
-                'widget' => 'single_text',
-            ])
             ->add('category', ChoiceType::class, [
                 'label' => 'Category',
                 'choices' => [

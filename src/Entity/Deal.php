@@ -36,7 +36,7 @@ class Deal
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $expirationDate = null;
+    private ?bool $is_expired = null;
 
     #[ORM\Column(length: 255)]
     private ?string $category = null;
@@ -137,14 +137,14 @@ class Deal
         return $this;
     }
 
-    public function getExpirationDate(): ?\DateTimeImmutable
+    public function getIsExpired(): ?bool
     {
-        return $this->expirationDate;
+        return $this->is_expired;
     }
 
-    public function setExpirationDate(\DateTimeImmutable $expirationDate): self
+    public function setIsExpired(bool $is_expired): self
     {
-        $this->expirationDate = $expirationDate;
+        $this->is_expired = $is_expired;
 
         return $this;
     }

@@ -60,7 +60,7 @@ class DealController extends AbstractController
     }
 
     #[Route('/deal/{id}/increment-reports', name: 'app_deal_increment_reports')]
-    public function incrementReports(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager, MailerInterface $mailer, Request $request): Response
+    public function incrementReports(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $deal = $dealRepository->find($id);
 
@@ -89,6 +89,21 @@ class DealController extends AbstractController
             ]);
 
         $mailer->send($email);
+
+        return $this->redirectToRoute('app_deal', ['id' => $deal->getId()]);
+    }
+
+    #[Route('/deal/{id}/expired', name: 'app_deal_expired')]
+    public function expiredDeal(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager, MailerInterface $mailer, Request $request): Response
+    {
+        $deal = $dealRepository->find($id);
+
+        if (!$deal) {
+            throw $this->createNotFoundException('Deal not found');
+        }
+
+        $deal->setIsExpired(true);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_deal', ['id' => $deal->getId()]);
     }
