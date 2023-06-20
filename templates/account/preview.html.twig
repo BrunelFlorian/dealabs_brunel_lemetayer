@@ -3,22 +3,32 @@
 {% block title %}Account{% endblock %}
 
 {% block submenu %}
+    <div class="user-bar">
+        <div class="user-info mx-auto wrapper-center">
+            <img src="https://picsum.photos/200" alt="Profile Picture" class="profile-picture">
+            <div class="user-details">
+                <p class="user-name">{{ app.user.pseudo }}</p>
+                <p class="user-status">Status: Online</p>
+            </div>
+        </div>
+    </div>
+    
     <nav class="submenu">
-    <ul class="nav mx-auto wrapper-center">
-        <li class="nav-item">
-            <a class="nav-link{% if app.request.pathinfo == '/account' %} active{% endif %}" href="{{ path('app_account') }}">Aperçu</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
-        </li>
-    </ul>
-</nav>
+        <ul class="nav mx-auto wrapper-center">
+            <li class="nav-item">
+                <a class="nav-link{% if app.request.pathinfo == '/account' %} active{% endif %}" href="{{ path('app_account') }}">Aperçu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}
 
 {% block body %}
