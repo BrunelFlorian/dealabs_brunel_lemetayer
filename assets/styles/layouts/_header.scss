@@ -106,6 +106,13 @@
                     background-color: lighten($darkorange, 10%);
                 }
             }
+            .btn-account {
+                background-color: $darkblack;
+                &:hover {
+                    box-shadow: 0 0 0 1px lighten($darkblack, 10%);
+                    background-color: lighten($darkblack, 10%);
+                }
+            }
         }
         .icon {
             color: $white;
