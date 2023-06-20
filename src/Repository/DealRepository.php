@@ -151,12 +151,46 @@ class DealRepository extends ServiceEntityRepository
      * @return int Returns the number of deals posted by user
      * @param string $id_user The id of the user
      */
-    public function findNumberOfDealsByUser(int $id_user): int
+    public function findNumberOfDealsByUser(int $id_user): ?int
     {
         return $this->createQueryBuilder('d')
             ->select('count(d.id)')
             ->andWhere('d.userCreated = :id_user')
             ->setParameter('id_user', $id_user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Find rating of the hottest deal posted by user
+     * @return int Returns the rate of the hottest deal posted by user
+     * @param string $id_user The id of the user
+     */
+    public function findRateHottestDealByUser(int $id_user): ?int
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d.notation')
+            ->andWhere('d.userCreated = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->orderBy('d.notation', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Find average rating of deals posted over 1 rolling year by user
+     * @return int Returns the average rating of deals posted over 1 rolling year by user
+     * @param string $id_user The id of the user
+     */
+    public function findAverageRateDealsByUser(int $id_user): ?int
+    {
+        return $this->createQueryBuilder('d')
+            ->select('AVG(d.notation)')
+            ->andWhere('d.userCreated = :id_user')
+            ->andWhere('d.createdAt > :lastYear')
+            ->setParameter('id_user', $id_user)
+            ->setParameter('lastYear', new \DateTime('-1 year'))
             ->getQuery()
             ->getSingleScalarResult();
     }

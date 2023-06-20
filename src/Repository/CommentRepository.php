@@ -40,6 +40,7 @@ class CommentRepository extends ServiceEntityRepository
     }
 
    /**
+    * Find comments by deal
     * @return Comment[] Returns an array of comments by deal
     * (sorted by publication date descending)
     */
@@ -53,13 +54,18 @@ class CommentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    public function findOneBySomeField($value): ?Comment
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Find number of comments by user
+     * @param int $userId User id
+     * @return int Returns number of comments by user
+     */
+   public function findNumberOfCommentsByUser(int $userId): ?int
+   {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->andWhere('c.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
