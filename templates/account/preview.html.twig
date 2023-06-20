@@ -2,17 +2,36 @@
 
 {% block title %}Account{% endblock %}
 
+{% block submenu %}
+    <nav class="submenu">
+    <ul class="nav mx-auto wrapper-center">
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account' %} active{% endif %}" href="{{ path('app_account') }}">Aperçu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+
 {% block body %}
 <div class="row g-0 mx-auto p-2 wrapper-center">
     <div class="col-md-3 bg-secondary border border-black border-start-0 rounded-end">
         <div class="example-wrapper">
-            <h1><i class="fas fa-chart-simple"></i>Statistics</h1>
+            <h1><i class="fas fa-chart-simple"></i> Statistics</h1>
             <p>Number of posted deals: {{ posted_deals }}</p>
         </div>
     </div>
     <div class="col-md-9">
         <div class="example-wrapper">
-            <h1><i class="fas fa-star"></i>Badges</h1>
+            <h1><i class="fas fa-star"></i> Badges</h1>
             
             <div class="badge-progress">
                 <div class="badge-progress-hexagon">

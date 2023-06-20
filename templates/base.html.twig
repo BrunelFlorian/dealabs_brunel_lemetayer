@@ -16,6 +16,18 @@
     </head>
     <body>
         {% include 'header.html.twig' %}
+        {% block submenu %}
+            <nav class="submenu">
+                <ul class="nav mx-auto wrapper-center">
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.pathinfo == '/home' %} active{% endif %}" href="{{ path('app_home') }}">À la une</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.pathinfo == '/hot' %} active{% endif %}" href="{{ path('app_hot') }}">Hot</a>
+                    </li>
+                </ul>
+            </nav>
+            {% endblock %}
         {% block body %}{% endblock %}
         {% include 'footer.html.twig' %}
     </body>
