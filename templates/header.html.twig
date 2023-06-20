@@ -10,8 +10,6 @@
                     <li class="nav-item ms-2 me-3">
                         <a class="nav-link" href="{{ path('app_coupon') }}">Coupon codes</a>
                     </li>
-
-
                     <div class="dropdown">
                         <a class="btn nav-link menu-button shape-circle d-flex align-items-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Menu
@@ -20,16 +18,12 @@
                             {{ render(controller('App\\Controller\\DealGroupMenuController::showDealGroupMenu')) }}
                         </ul>
                     </div>
-
-
-
-
                 </ul>
             </div>
         </div>
         <div class="navbar-utilities d-flex flex-row align-items-center">
-            <form class="d-flex align-items-center" role="search">
-                <input class="form-control me-2 shape-circle" type="search" placeholder="Search..." aria-label="Search">
+            <form action="{{ path('app_search') }}" method="POST" role="search" class="d-flex align-items-center">
+                <input class="form-control me-2 shape-circle" type="search" name="search_query" placeholder="Search..." aria-label="Search">
                 <i class="icon search-icon fas fa-search"></i>
             </form>
             {% if app.user %}
