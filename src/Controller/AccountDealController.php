@@ -13,8 +13,12 @@ class AccountDealController extends AbstractController
     #[Route('/account/deal', name: 'app_account_deal')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $posted_deals = $entityManager->getRepository(Deal::class)->findNumberOfDealsByUser($this->getUser()->getId());
+        $number_posted_deals = $entityManager->getRepository(Deal::class)->findNumberOfDealsByUser($this->getUser()->getId());
+
+        $posted_deals = $entityManager->getRepository(Deal::class)->findDealsByUser($this->getUser()->getId());
+
         return $this->render('account/account_deal.html.twig', [
+            'number_posted_deals' => $number_posted_deals,
             'posted_deals' => $posted_deals,
         ]);
     }

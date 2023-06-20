@@ -162,6 +162,21 @@ class DealRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find deals posted by user
+     * @return Deal[] Returns deals posted by user
+     * @param string $id_user The id of the user
+     */
+    public function findDealsByUser(int $id_user): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.userCreated = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Find rating of the hottest deal posted by user
      * @return int Returns the rate of the hottest deal posted by user
      * @param string $id_user The id of the user

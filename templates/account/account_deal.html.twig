@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Account - Deal{% endblock %}
-
 {% block submenu %}
     <nav class="submenu">
     <ul class="nav mx-auto wrapper-center">
@@ -9,7 +7,7 @@
             <a class="nav-link{% if app.request.pathinfo == '/account' %} active{% endif %}" href="{{ path('app_account') }}">Aperçu</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
+            <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals ({{ number_posted_deals }})</a>
         </li>
         <li class="nav-item">
             <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
@@ -22,12 +20,35 @@
 {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
-</div>
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <h1 class="pb-3">My posted deals</h1>
+        <div class="col-9">
+            <ul class="deal-list">
+                {% for deal in posted_deals %}
+                    <div class="card mb-3 me-3">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                        <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                        <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                        <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
+                                    </div>
+                                    <h2>{{ deal.Title }}</h2>
+                                    <p>{{ deal.Description }}</p>
+                                    <p>{{ deal.Price }}€</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}

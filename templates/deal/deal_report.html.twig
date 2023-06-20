@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Deal Report</title>
-</head>
-<body>
-    <h1>Deal Report</h1>
-    <p>The deal with ID {{ dealId }} and title "{{ dealTitle }}" has been reported.</p>
-    <p>Deal Link: <a href="{{ path('app_deal', {'id': dealId}) }}">{{ path('app_deal', {'id': dealId}) }}</a></p>
-    <p>Reported by: {{ reporterName }}</p>
-    <p>Reason for report: {{ reason }}</p>
-    <p>Total number of reports: {{ reportsCount }}.</p>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Deal Report</title>
+    </head>
+    <body>
+        <h1>Deal Report</h1>
+        <p>The deal with ID {{ dealId }} and title "{{ dealTitle }}" has been reported.</p>
+        <p>Deal Link: <a href="{{ path('app_deal', {'id': dealId}) }}">{{ path('app_deal', {'id': dealId}) }}</a></p>
+        <p>Reported by: {{ reporterName }}</p>
+        <p>Reason for report: {{ reason }}</p>
+        <p>Total number of reports: {{ reportsCount }}.</p>
+    </body>
 </html>
