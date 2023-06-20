@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Deal;
+use App\Entity\Rating;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,11 +25,17 @@ class AccountController extends AbstractController
 
         $average_rating = $entityManager->getRepository(Deal::class)->findAverageRateDealsByUser($user_id);
 
+        $percentage_hot_deals = $entityManager->getRepository(Deal::class)->percentageHotPostedDealByUser($user_id);
+
+        $rated_deals = $entityManager->getRepository(Rating::class)->countDealRatedByUser($user_id);
+
         return $this->render('account/preview.html.twig', [
             'posted_deals' => $posted_deals,
             'posted_comments' => $posted_comments,
             'hottest_rating' => $hottest_rating,
             'average_rating' => $average_rating,
+            'percentage_hot_deals' => $percentage_hot_deals,
+            'rated_deals' => $rated_deals,
         ]);
     }
 }

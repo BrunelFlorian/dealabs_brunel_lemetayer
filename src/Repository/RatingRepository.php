@@ -39,28 +39,18 @@ class RatingRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Rating[] Returns an array of Rating objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Rating
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Number of deal rated by user
+     * @return int Returns the number of deal rated by user
+     * @param string $id_user The id of the user
+     */
+    public function countDealRatedByUser(string $id_user): int
+    {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere('r.user = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

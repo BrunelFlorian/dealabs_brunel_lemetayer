@@ -194,4 +194,28 @@ class DealRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * Percentage of posted deals that became hot by user
+     * @return float Returns the rate of posted deals that became hot by user
+     * @param string $id_user The id of the user
+     */
+    public function percentageHotPostedDealByUser(int $id_user): ?float
+    {
+        $totalDeals = $this->findNumberOfDealsByUser($id_user);
+        $hotDeals = $this->createQueryBuilder('d')
+            ->select('count(d.id)')
+            ->andWhere('d.userCreated = :id_user')
+            ->andWhere('d.notation > :notation')
+            ->setParameter('id_user', $id_user)
+            ->setParameter('notation', 100)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        if ($totalDeals > 0) {
+            return round($hotDeals / $totalDeals, 2);
+        } else {
+            return null;
+        }
+    }
 }
