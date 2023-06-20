@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block submenu %}
+    <nav class="submenu">
+    <ul class="nav mx-auto wrapper-center">
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account' %} active{% endif %}" href="{{ path('app_account') }}">Aperçu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block body %}
+<<<<<<< HEAD:templates/account/account.html.twig
+    <div class="row g-0 mx-auto p-2 wrapper-center">
+        <div class="col-md-3 border border-black rounded">
+            <div class="example-wrapper">
+                <h1><i class="fas fa-chart-simple"></i>Statistics</h1>
+                <p>Number of posted deals: {{ posted_deals }}</p>
+                <p>Number of posted comments: {{ posted_comments }}</p>
+                <p>Rating of the hottest posted deal: {{ hottest_rating }}</p>
+                <p>Average rating of deals posted over 1 rolling year: {{ average_rating }}</p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="example-wrapper">
+                <h1><i class="fas fa-star"></i>Badges</h1>
+                
+                <div class="badge-progress">
+                    <div class="badge-progress-hexagon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="badge-progress-bar">
+                        <div class="badge-progress-name">Badge 1</div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="badge-progress">
+                    <div class="badge-progress-hexagon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="badge-progress-bar">
+                        <div class="badge-progress-name">Badge 2</div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="badge-progress">
+                    <div class="badge-progress-hexagon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="badge-progress-bar">
+                        <div class="badge-progress-name">Badge 3</div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+=======
+<div class="row g-0 mx-auto p-2 wrapper-center">
+    <div class="col-md-3 bg-secondary border border-black border-start-0 rounded-end">
+        <div class="example-wrapper">
+            <h1><i class="fas fa-chart-simple"></i> Statistics</h1>
+            <p>Number of posted deals: {{ posted_deals }}</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="example-wrapper">
+            <h1><i class="fas fa-star"></i> Badges</h1>
+            
+            <div class="badge-progress">
+                <div class="badge-progress-hexagon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="badge-progress-bar">
+                    <div class="badge-progress-name">Badge 1</div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-progress">
+                <div class="badge-progress-hexagon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="badge-progress-bar">
+                    <div class="badge-progress-name">Badge 2</div>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-progress">
+                <div class="badge-progress-hexagon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="badge-progress-bar">
+                    <div class="badge-progress-name">Badge 3</div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+>>>>>>> fc307d67e0cbfa6db99505aadcf0b8b2c09fbf1d:templates/account/preview.html.twig
+{% endblock %}

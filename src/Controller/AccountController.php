@@ -24,7 +24,7 @@ class AccountController extends AbstractController
 
         $average_rating = $entityManager->getRepository(Deal::class)->findAverageRateDealsByUser($user_id);
 
-        return $this->render('account/account.html.twig', [
+        return $this->render('account/preview.html.twig', [
             'posted_deals' => $posted_deals,
             'posted_comments' => $posted_comments,
             'hottest_rating' => $hottest_rating,
