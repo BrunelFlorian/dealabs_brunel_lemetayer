@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Address;
 
 
@@ -60,7 +60,7 @@ class DealController extends AbstractController
     }
 
     #[Route('/deal/{id}/increment-reports', name: 'app_deal_increment_reports')]
-    public function incrementReports(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function incrementReports(int $id, DealRepository $dealRepository, Mailer $mailer, EntityManagerInterface $entityManager, Request $request): Response
     {
         $deal = $dealRepository->find($id);
 
@@ -94,7 +94,7 @@ class DealController extends AbstractController
     }
 
     #[Route('/deal/{id}/expired', name: 'app_deal_expired')]
-    public function expiredDeal(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager, MailerInterface $mailer, Request $request): Response
+    public function expiredDeal(int $id, DealRepository $dealRepository, EntityManagerInterface $entityManager): Response
     {
         $deal = $dealRepository->find($id);
 

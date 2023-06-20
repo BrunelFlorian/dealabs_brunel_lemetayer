@@ -24,3 +24,21 @@
         border-color: #868789;
     }
 }
+
+.slick-slider {
+    .card-body {
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 12px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}

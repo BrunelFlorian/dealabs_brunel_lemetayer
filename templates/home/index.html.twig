@@ -2,8 +2,8 @@
 
 {% block body %}
     <div class="row g-0 mx-auto p-2 wrapper-center">
+        <h1>Deals list</h1>
         <div class="col-9">
-            <h1>Deals list</h1>
             <ul class="deal-list">
                 {% for deal in deals %}
                     <div class="card mb-3 me-3">
@@ -13,12 +13,10 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <div class="card-body">
-                                        <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
-                                            <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
-                                            <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
-                                            <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
-                                        </div>
+                                    <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                        <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                        <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                        <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
                                     </div>
                                     <h2>{{ deal.Title }}</h2>
                                     <p>{{ deal.Description }}</p>
@@ -35,21 +33,24 @@
         </div>
         {# TODO finir slider #}
         <div class="card col-3">
-            <ul class="slick-slider">
+            <div class="slick-slider">
                 {% for deal in hotestDeals %}
-                    {% if loop.index is divisible by(4) %}
-                        <div class="slider-container">
-                    {% endif %}
-                        <li>
-                            <h2>{{ deal.Title }}</h2>
-                            <p>{{ deal.Description }}</p>
-                            <p>Price: {{ deal.Price }}</p>
-                        </li>
-                    {% if loop.index is divisible by(4) %}
+                    <div class="card mb-3 me-3">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h2>{{ deal.Title }}</h2>
+                                    <p>{{ deal.Description }}</p>
+                                    <p class="price">Price: {{ deal.Price }}</p>
+                                </div>
+                            </div>
                         </div>
-                    {% endif %}
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

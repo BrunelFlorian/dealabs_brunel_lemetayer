@@ -145,4 +145,19 @@ class DealRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+    /**
+     * Find number of deals posted by user
+     * @return int Returns the number of deals posted by user
+     * @param string $id_user The id of the user
+     */
+    public function findNumberOfDealsByUser(int $id_user): int
+    {
+        return $this->createQueryBuilder('d')
+            ->select('count(d.id)')
+            ->andWhere('d.userCreated = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
