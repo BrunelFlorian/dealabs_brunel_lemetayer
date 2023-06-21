@@ -39,6 +39,27 @@ class SavedDealRepository extends ServiceEntityRepository
         }
     }
 
+    public function findSavedDealsByUser(int $user_id): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.user = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->orderBy('s.createdAt', 'DESC') // Tri par date décroissante
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNumberOfSavedDealsByUser(int $user_id): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('count(s.id)')
+            ->andWhere('s.user = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
 //    /**
 //     * @return SavedDeal[] Returns an array of SavedDeal objects
 //     */
