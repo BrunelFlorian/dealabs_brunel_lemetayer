@@ -28,7 +28,10 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     {% if app.user %}
-                        <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary me-2 mb-2"{% if deal.isExpired %} disabled{% endif %}>Save</a>
+                        <form action="{{ path('app_deal_save', {'id': deal.id}) }}" method="post">
+                            <button type="submit" class="btn btn-primary me-2 mb-2"{% if deal.isExpired %} disabled{% endif %}>Save</button>
+                        </form>
+                        {# <a href="{{ path('app_deal', {'id': deal.id}) }}" class="btn btn-primary me-2 mb-2"{% if deal.isExpired %} disabled{% endif %}>Save</a> #}
                         <div class="btn-group">
                             <a href="{{ path('app_deal_increment_reports', {'id': deal.id}) }}" class="btn btn-primary me-2 mb-2" id="report-button"{% if deal.isExpired %} disabled{% endif %}>Report <i class="fas fa-flag"></i></a>
                             <div id="report-form">

@@ -14,8 +14,10 @@ class AccountSaveDealController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $posted_deals = $entityManager->getRepository(Deal::class)->findNumberOfDealsByUser($this->getUser()->getId());
+        $number_alerts = $entityManager->getRepository(Alert::class)->findNumberOfAlertsByUser($this->getUser()->getId());
         return $this->render('account/save_deal.html.twig', [
             'posted_deals' => $posted_deals,
+            'number_alerts' => $number_alerts,
         ]);
     }
 }

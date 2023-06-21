@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Address;
+use App\Repository\SavedDealRepository;
+use App\Entity\SavedDeal;
 
 
 class DealController extends AbstractController
@@ -103,6 +105,26 @@ class DealController extends AbstractController
         }
 
         $deal->setIsExpired(true);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_deal', ['id' => $deal->getId()]);
+    }
+
+    #[Route('/deal/{id}/save', name: 'app_deal_save')]  //, methods: ['POST']
+    public function saveDeal(int $id, Request $request, DealRepository $dealRepository, SavedDealRepository $savedDealRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $deal = $dealRepository->find($id);
+
+        if (!$user || !$deal) {
+            throw $this->createNotFoundException('User or Deal not found');
+        }
+
+        $savedDeal = new SavedDeal();
+        $savedDeal->setUser($user);
+        $savedDeal->setDeal($deal);
+                
+        $entityManager->persist($savedDeal);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_deal', ['id' => $deal->getId()]);
