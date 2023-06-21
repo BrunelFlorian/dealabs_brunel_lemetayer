@@ -1,0 +1,8 @@
+{% for alerted_deal in alerted_deals %}
+    <li>
+        <a href="{{ path('app_deal', {'id': alerted_deal.id}) }}">
+            <span class="dropdown-item notification-item">New alert: The deal "{{ alerted_deal.title }}" corresponds to your alert!</span>
+        </a>
+    </li>
+    <hr class="text-white">
+{% endfor %}

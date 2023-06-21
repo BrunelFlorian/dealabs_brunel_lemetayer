@@ -5,7 +5,7 @@
 {% block submenu %}
     <div class="user-bar">
         <div class="user-info mx-auto wrapper-center">
-            <img src="https://picsum.photos/200" alt="Profile Picture" class="profile-picture">
+            <img src="https://picsum.photos/200" alt="Profile Picture" class="profile-picture me-2">
             <div class="user-details">
                 <p class="user-name">{{ app.user.pseudo }}</p>
                 <p class="user-status">Status: Online</p>
@@ -25,7 +25,7 @@
                 <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
+                <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts({{ number_alerts }})</a>
             </li>
         </ul>
     </nav>

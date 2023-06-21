@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Alert;
+use App\Entity\Deal;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,28 +41,64 @@ class AlertRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Alert[] Returns an array of Alert objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+     /**
+     * Find alerts by user
+     * @return Alert[] Returns an array of alerts by user
+     * @param int $id_user The id of the user
+     */
+    public function findAlertsByUser(int $id_user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Alert
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Find number of alerts by user
+     * @return int Returns the number of alerts by user
+     * @param int $id_user The id of the user
+     */
+    public function findNumberOfAlertsByUser(int $id_user): ?int
+    {
+        return $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->andWhere('a.user = :id_user')
+            ->setParameter('id_user', $id_user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Find alerted deals by user, check new deal if correpond to alert
+     * @return array Returns an array of alerted deals by user
+     * @param int $id_user The id of the user
+     */
+    public function findAlertedDealsByUser(int $id_user): array
+    {
+        $user = $this->getEntityManager()->getReference(User::class, $id_user);
+
+        $alerts = $this->findBy(['user' => $user]);
+
+        $deals = [];
+
+        foreach ($alerts as $alert) {
+            $matchingDeals = $this->getEntityManager()->createQueryBuilder()
+                ->select('d')
+                ->from(Deal::class, 'd')
+                ->where('d.title LIKE :keyword')
+                ->andWhere('d.notation >= :minTemperature')
+                ->setParameter('keyword', '%' . $alert->getKeyword() . '%')
+                ->setParameter('minTemperature', $alert->getMinTemperature())
+                ->getQuery()
+                ->getResult();
+
+            $deals = array_merge($deals, $matchingDeals);
+
+            $uniqueDeals = array_unique($deals, SORT_REGULAR);
+        }
+
+        return $uniqueDeals;
+    }
 }

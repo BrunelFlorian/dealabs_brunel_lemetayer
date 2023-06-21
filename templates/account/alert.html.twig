@@ -5,7 +5,7 @@
 {% block submenu %}
     <div class="user-bar">
         <div class="user-info mx-auto wrapper-center">
-            <img src="https://picsum.photos/200" alt="Profile Picture" class="profile-picture">
+            <img src="https://picsum.photos/200" alt="Profile Picture" class="profile-picture me-2">
             <div class="user-details">
                 <p class="user-name">{{ app.user.pseudo }}</p>
                 <p class="user-status">Status: Online</p>
@@ -25,7 +25,7 @@
                 <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts()</a>
+                <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts({{ number_alerts }})</a>
             </li>
         </ul>
     </nav>
@@ -40,5 +40,67 @@
             {{ form_row(alertForm.notificationFrequency) }}
             {{ form_row(alertForm.save) }}
         {{ form_end(alertForm) }}
+    
+        {% if alerts is not empty %}
+            <div class="card p-3">
+                <h3 class="my-3 fw-bold">My saved alerts</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Keyword</th>
+                            <th scope="col">Minimal temperature</th>
+                            <th scope="col">Frequency</th>
+                            <th scope="col">Notification email</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alert in alerts %}
+                            <tr>
+                                <td>{{ alert.keyword }}</td>
+                                <td>{{ alert.minTemperature }}</td>
+                                <td>{{ alert.notificationFrequency }}</td>
+                                <td>{% if alert.emailNotificationEnabled %}Yes{% else %}No{% endif %}</td>
+                                <td>
+                                    <form action="{{ path('app_delete_alert', {'id': alert.id}) }}" method="POST">
+                                        <button type="submit" class="btn btn-danger"><span class="text-white">Delete</span></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        <h1 class="mt-3 pb-3">Alerted deals</h1>
+        <div class="col-9">
+            <ul class="deal-list">
+                {% for deal in alerted_deals %}
+                    <div class="card mb-3 me-3">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': deal.id}) }}">
+                                        <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                        <p class="px-1"><span class="notation-value-{{ deal.id }}">{{ deal.notation }}</span>°</p>
+                                        <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
+                                    </div>
+                                    <h2>{{ deal.Title }}</h2>
+                                    <p>{{ deal.Description }}</p>
+                                    <p>{{ deal.Price }}€</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

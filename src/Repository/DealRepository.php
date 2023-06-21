@@ -149,7 +149,7 @@ class DealRepository extends ServiceEntityRepository
     /**
      * Find number of deals posted by user
      * @return int Returns the number of deals posted by user
-     * @param string $id_user The id of the user
+     * @param int $id_user The id of the user
      */
     public function findNumberOfDealsByUser(int $id_user): ?int
     {
@@ -164,7 +164,7 @@ class DealRepository extends ServiceEntityRepository
     /**
      * Find deals posted by user
      * @return Deal[] Returns deals posted by user
-     * @param string $id_user The id of the user
+     * @param int $id_user The id of the user
      */
     public function findDealsByUser(int $id_user): array
     {
@@ -179,7 +179,7 @@ class DealRepository extends ServiceEntityRepository
     /**
      * Find rating of the hottest deal posted by user
      * @return int Returns the rate of the hottest deal posted by user
-     * @param string $id_user The id of the user
+     * @param int $id_user The id of the user
      */
     public function findRateHottestDealByUser(int $id_user): ?int
     {
@@ -196,7 +196,7 @@ class DealRepository extends ServiceEntityRepository
     /**
      * Find average rating of deals posted over 1 rolling year by user
      * @return int Returns the average rating of deals posted over 1 rolling year by user
-     * @param string $id_user The id of the user
+     * @param int $id_user The id of the user
      */
     public function findAverageRateDealsByUser(int $id_user): ?int
     {
@@ -213,7 +213,7 @@ class DealRepository extends ServiceEntityRepository
     /**
      * Percentage of posted deals that became hot by user
      * @return float Returns the rate of posted deals that became hot by user
-     * @param string $id_user The id of the user
+     * @param int $id_user The id of the user
      */
     public function percentageHotPostedDealByUser(int $id_user): ?float
     {
