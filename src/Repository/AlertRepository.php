@@ -82,6 +82,7 @@ class AlertRepository extends ServiceEntityRepository
         $alerts = $this->findBy(['user' => $user]);
 
         $deals = [];
+        $uniqueDeals = [];
 
         foreach ($alerts as $alert) {
             $matchingDeals = $this->getEntityManager()->createQueryBuilder()

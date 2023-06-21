@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Alert;
 use App\Entity\Deal;
+use App\Entity\SavedDeal;
 use App\Form\AlertFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,11 +32,9 @@ class AccountAlertController extends AbstractController
         }
 
         $posted_deals = $entityManager->getRepository(Deal::class)->findNumberOfDealsByUser($this->getUser()->getId());
-
         $alerts = $entityManager->getRepository(Alert::class)->findAlertsByUser($this->getUser()->getId());
-
         $number_alerts = $entityManager->getRepository(Alert::class)->findNumberOfAlertsByUser($this->getUser()->getId());
-        
+        $number_saved_deals = $entityManager->getRepository(SavedDeal::class)->findNumberOfSavedDealsByUser($this->getUser()->getId());
         
         // TODO degager les notifs d'ici
         $alerted_deals = $entityManager->getRepository(Alert::class)->findAlertedDealsByUser($this->getUser()->getId());
@@ -45,6 +44,7 @@ class AccountAlertController extends AbstractController
             'alertForm' => $form->createView(),
             'alerts' => $alerts,
             'number_alerts' => $number_alerts,
+            'number_saved_deals' => $number_saved_deals,
             'alerted_deals' => $alerted_deals,
         ]);
     }

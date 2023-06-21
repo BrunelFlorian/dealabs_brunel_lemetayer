@@ -22,7 +22,7 @@
                 <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals()</a>
+                <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals({{ number_saved_deals }})</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts({{ number_alerts }})</a>

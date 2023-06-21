@@ -22,42 +22,44 @@
                 <a class="nav-link{% if app.request.pathinfo == '/account/deal' %} active{% endif %}" href="{{ path('app_account_deal') }}">Deals({{ posted_deals }})</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals({{ saved_deals }})</a>
+                <a class="nav-link{% if app.request.pathinfo == '/account/saveDeal' %} active{% endif %}" href="{{ path('app_account_saveDeal') }}">Saved Deals({{ number_saved_deals }})</a>
             </li>
-            {# <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link{% if app.request.pathinfo == '/account/alert' %} active{% endif %}" href="{{ path('app_account_alert') }}">Alerts({{ number_alerts }})</a>
-            </li> #}
+            </li>
         </ul>
     </nav>
 {% endblock %}
 
 {% block body %}
-
-<div class="row g-0 mx-auto p-2 wrapper-center">
-    {% for savedDeal in savedDeals %}
-    <div class="card mb-3 me-3">
-        <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': savedDeal.deal.id}) }}">
-                        <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
-                        <p class="px-1"><span class="notation-value-{{ savedDeal.deal.id }}">{{ savedDeal.deal.notation }}</span>°</p>
-                        <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
-                    </div>
-                    <h2>{{ savedDeal.deal.Title }}</h2>
-                    <p>{{ savedDeal.deal.Description }}</p>
-                    <p>{{ savedDeal.deal.Price }}€</p>
-                    <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': savedDeal.deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+    {% if savedDeals is not empty %}
+        <div class="row g-0 mx-auto p-2 wrapper-center">
+            {% for savedDeal in savedDeals %}
+                <div class="card mb-3 me-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="https://picsum.photos/200" class="img-fluid rounded" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="btn-group rate-deal-container shape-circle" data-url="{{ path('ajax_deal_update', {'id': savedDeal.deal.id}) }}">
+                                    <a class="btn shape-circle rate-deal decrease" data-type="decrease"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Negative vote"><i class="fas fa-minus"></i></a>
+                                    <p class="px-1"><span class="notation-value-{{ savedDeal.deal.id }}">{{ savedDeal.deal.notation }}</span>°</p>
+                                    <a class="btn shape-circle rate-deal increase" data-type="increase"{% if app.user is null %} href="{{ path('app_login') }}"{% endif %} title="Positive vote"><i class="fas fa-plus"></i></a>
+                                </div>
+                                <h2>{{ savedDeal.deal.Title }}</h2>
+                                <p>{{ savedDeal.deal.Description }}</p>
+                                <p>{{ savedDeal.deal.Price }}€</p>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary shape-circle show-deal" href="{{ path('app_deal', {'id': savedDeal.deal.id}) }}">Voir le deal <i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-    </div>
-{% endfor %}
-
-</div>
+    {% else %}
+        <p>No saved deals</p>
+    {% endif %}
 {% endblock %}
