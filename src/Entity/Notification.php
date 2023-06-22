@@ -26,6 +26,9 @@ class Notification
     #[ORM\OneToMany(mappedBy: 'notification', targetEntity: User::class)]
     private Collection $user;
 
+    #[ORM\Column(length: 255)]
+    private ?string $url = null;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -86,6 +89,18 @@ class Notification
                 $user->setNotification(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): static
+    {
+        $this->url = $url;
 
         return $this;
     }
