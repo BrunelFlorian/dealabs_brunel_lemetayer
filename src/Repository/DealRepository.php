@@ -183,14 +183,16 @@ class DealRepository extends ServiceEntityRepository
      */
     public function findRateHottestDealByUser(int $id_user): ?int
     {
-        return $this->createQueryBuilder('d')
-            ->select('d.notation')
-            ->andWhere('d.userCreated = :id_user')
-            ->setParameter('id_user', $id_user)
-            ->orderBy('d.notation', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleScalarResult();
+        $result = $this->createQueryBuilder('d')
+        ->select('d.notation')
+        ->andWhere('d.userCreated = :id_user')
+        ->setParameter('id_user', $id_user)
+        ->orderBy('d.notation', 'DESC')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+        return $result !== null ? $result['notation'] : null;
     }
 
     /**
