@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Alert::class, orphanRemoval: true)]
     private Collection $alerts;
 
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    private ?Notification $notification = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -233,6 +236,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $alert->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNotification(): ?Notification
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(?Notification $notification): static
+    {
+        $this->notification = $notification;
 
         return $this;
     }
