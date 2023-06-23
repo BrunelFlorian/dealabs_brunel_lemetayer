@@ -3,43 +3,53 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div id="login">
-        <div class="wrapper-login">
-            <div class="wrapper-register">
+    <div id="login" class="d-flex justify-content-center align-items-center">
+        <div class="card p-4">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                </div>
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="form-floating mb-3">
+                        <input type="text" value="{{ last_username }}" name="identifier" id="inputIdentifier" class="form-control" placeholder="Email or Pseudo" autocomplete="off" required autofocus>
+                        <label for="inputIdentifier">Email or Pseudo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                        <label for="inputPassword">Password</label>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            Sign in
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
                 <p class="register-title">Don't have an account?</p>
                 <p>Sign up to enjoy our good deals!</p>
-                <a href="{{ path('app_register') }}" class="btn btn-register">Sign up</a>
+                <a href="{{ path('app_register') }}" class="btn btn-secondary">Sign up</a>
             </div>
-            <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
-
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputIdentifier">Email or Pseudo</label>
-                <input type="text" value="{{ last_username }}" name="identifier" id="inputIdentifier" class="form-control" autocomplete="off" required autofocus>
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-
-                <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}"
-                >
-
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Sign in
-                </button>
-            </form>
         </div>
     </div>
 {% endblock %}
