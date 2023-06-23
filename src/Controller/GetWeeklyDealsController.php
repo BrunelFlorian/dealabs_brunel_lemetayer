@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\DealRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class GetWeeklyDealsController
+class GetWeeklyDealsController extends AbstractController 
 {
     private $dealRepository;
 
@@ -14,18 +14,11 @@ class GetWeeklyDealsController
         $this->dealRepository = $dealRepository;
     }
 
-    public function __invoke(): JsonResponse
+    public function __invoke(): array
     {
         // Récupérer les deals de la semaine depuis le repository
         $weeklyDeals = $this->dealRepository->findWeeklyDeals();
 
-        // Transformer les données des deals en tableau
-        $dealsData = [];
-        foreach ($weeklyDeals as $deal) {
-            $dealsData[] = $deal;
-        }
-
-        // Retourner les deals sous forme de réponse JSON
-        return new JsonResponse($dealsData);
+        return $weeklyDeals;
     }
 }

@@ -6,9 +6,10 @@ use App\Repository\DealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
-use App\Controller\WeeklyDealController;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Controller\GetWeeklyDealsController;
 
 #[ORM\Entity(repositoryClass: DealRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -27,30 +28,38 @@ class Deal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['deal:list'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['deal:list'])]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Groups(['deal:list'])]
     private ?float $price = null;
 
     #[ORM\Column(type: "text", nullable: true)]
+    #[Groups(['deal:list'])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['deal:list'])]
     private ?int $notation = null;
 
     #[ORM\Column]
     private ?int $userCreated = null;
 
     #[ORM\Column]
+    #[Groups(['deal:list'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Groups(['deal:list'])]
     private ?bool $is_expired = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['deal:list'])]
     private ?string $category = null;
 
     #[ORM\OneToMany(mappedBy: 'deal', targetEntity: Comment::class, orphanRemoval: true)]
