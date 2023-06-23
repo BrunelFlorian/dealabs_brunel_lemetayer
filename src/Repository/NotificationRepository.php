@@ -39,28 +39,19 @@ class NotificationRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Notification[] Returns an array of Notification objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Notification
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Get not readed notifications by user
+     * @return array Returns an array of not readed notifications by user
+     * @param int $id_user The id of the user
+     */
+    public function findNotificationsByUser(int $id_user): array
+    {
+        return $this->createQueryBuilder('n')
+        ->andWhere('n.user = :id_user')
+        ->andWhere('n.readed = :readed')
+        ->setParameter('id_user', $id_user)
+        ->setParameter('readed', false)
+        ->getQuery()
+        ->getResult();
+    }
 }

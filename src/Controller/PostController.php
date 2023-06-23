@@ -31,6 +31,7 @@ class PostController extends AbstractController
             $deal->setCategory($form->get('category')->getData());
             $deal->setDealGroup($dealGroupRepository->find($form->get('dealGroup')->getData()));
             $deal->setNotation(0);
+            $deal->setIsExpired(false);
             
             $entityManager->persist($deal);
             $entityManager->flush();

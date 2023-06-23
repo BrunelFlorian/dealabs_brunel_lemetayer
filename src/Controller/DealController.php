@@ -16,8 +16,9 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Address;
 use App\Repository\SavedDealRepository;
 use App\Entity\SavedDeal;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
-
+#[AsController]
 class DealController extends AbstractController
 {
     #[Route('/deal/{id}', name: 'app_deal')]

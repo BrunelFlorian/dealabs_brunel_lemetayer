@@ -5,11 +5,23 @@ namespace App\Entity;
 use App\Repository\DealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use App\Controller\WeeklyDealController;
 
 #[ORM\Entity(repositoryClass: DealRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[ApiResource( 
+    operations: [ 
+        new GetCollection( 
+            name: 'get_deals_of_the_week', 
+            uriTemplate: 'deals_of_the_week', 
+            controller: GetWeeklyDealsController::class, 
+            normalizationContext: ['groups' => ['deal:list']], 
+        ),
+    ], 
+)]
 class Deal
 {
     #[ORM\Id]
@@ -249,5 +261,6 @@ class Deal
     public function prePersist(): void
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->is_expired = false;
     }
 }

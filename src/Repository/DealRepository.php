@@ -235,4 +235,18 @@ class DealRepository extends ServiceEntityRepository
             return null;
         }
     }
+
+    /**
+     * Find weekly deals
+     * @return float Returns a list of weekly deals
+     */
+    public function findWeeklyDeals(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.createdAt > :lastWeek')
+            ->setParameter('lastWeek', new \DateTime('-1 week'))
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

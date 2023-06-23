@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Notification
 {
     #[ORM\Id]
@@ -23,13 +24,12 @@ class Notification
     #[ORM\JoinColumn(nullable: false)]
     private ?Deal $deal = null;
 
-    #[ORM\OneToMany(mappedBy: 'notification', targetEntity: User::class)]
-    private Collection $user;
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
+    #[ORM\Column]
+    private ?bool $readed = null;
 
     public function getId(): ?int
     {
@@ -60,33 +60,33 @@ class Notification
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): static
+    public function setUser(?User $user): static
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-            $user->setNotification($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function isReaded(): ?bool
     {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getNotification() === $this) {
-                $user->setNotification(null);
-            }
-        }
+        return $this->readed;
+    }
+
+    public function setReaded(bool $readed): static
+    {
+        $this->readed = $readed;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->readed = false;
     }
 }

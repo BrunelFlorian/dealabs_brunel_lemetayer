@@ -30,10 +30,10 @@
             <li id="notifications" class="dropdown mx-2">
                 <a class="btn nav-link menu-button shape-circle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="icon fas fa-bell"></i>
-                    {# <span class="badge rounded-pill bg-danger">{{ alerted_deals|length }}</span> #}
+                    <span class="badge rounded-pill bg-danger">{{ app.session.get('notifications')|length }}</span>
                 </a>
                 <ul class="dropdown-menu">
-                    {# {{ render(controller('App\\Controller\\AccountAlertController::showNotifications', { 'alerted_deals': alerted_deals })) }} #}
+                    {{ render(controller('App\\Controller\\AccountAlertController::showNotifications')) }}
                 </ul>
             </li>
             <li class="nav-item me-2">
